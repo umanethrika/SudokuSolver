@@ -10,9 +10,10 @@
 #include<string>
 #include<utility>
 #include<vector>
+#include <algorithm>
 
 #include"../src/coord.h"
-
+using namespace std;
 namespace sudoku {
 
 class Grid {
@@ -99,10 +100,7 @@ class Grid {
     void clear_values_starting_from_coord(Coord coord) {
         for (int row = coord.first; row < GRID_LEN; row++) {
             for (int col = coord.second; col < GRID_LEN; col++) {
-                auto pos_in_pre_filled = std::find(
-                    coords_that_were_pre_filled.begin(),
-                    coords_that_were_pre_filled.end(),
-                    coord);
+                auto pos_in_pre_filled = coords_that_were_pre_filled.find(coord);
                 if (pos_in_pre_filled == coords_that_were_pre_filled.end()) {
                     grid.at(coord.first).at(coord.second) = 0;
                 }
